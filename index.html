@@ -1,0 +1,80 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Music Explorer</h1>
+        <p>Discover music and build your own collection.</p>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <h2>Find Music</h2>
+
+            <form id="searchForm">
+                <input type="text" id="searchInput"
+                    placeholder="Enter artist or song name" required>
+
+                <select id="genreSelect">
+                    <option value="all">All genres</option>
+                    <option value="Hip-Hop/Rap">Hip-Hop / Rap</option>
+                    <option value="R&B/Soul">R&B / Soul</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Rock">Rock</option>
+                </select>
+
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <section class="collection-section">
+            <div class="collection-header">
+                <h2>My Collection</h2>
+
+                <select id="filterSelect">
+                    <option value="all">All saved songs</option>
+                    <option value="Hip-Hop/Rap">Hip-Hop / Rap</option>
+                    <option value="R&B/Soul">R&B / Soul</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Rock">Rock</option>
+                </select>
+            </div>
+
+            <p id="statusMessage">Search for an artist to get started.</p>
+
+            <div id="musicResults" class="music-grid"></div>
+        </section>
+
+        <section class="database-section">
+            <h2>Database Demo</h2>
+            <p>
+                The controls above will later connect to a PHP backend
+                and a MariaDB database.
+            </p>
+
+            <div class="database-buttons">
+                <button id="showSavedButton">Show Saved Songs</button>
+                <button id="showSearchButton">Show Search Results</button>
+            </div>
+
+            <p id="databaseMessage">
+                Database connection will be added in the next step.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Music Explorer | Student Project 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+```
