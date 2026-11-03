@@ -9,6 +9,8 @@ const databaseMessage = document.getElementById("databaseMessage");
 let searchSongs = [];
 let savedSongs = [];
 
+// SEARCH FORM
+
 searchForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -21,6 +23,9 @@ searchForm.addEventListener("submit", function(event) {
 
     searchMusic(searchText);
 });
+
+
+// GET DATA FROM ITUNES API
 
 async function searchMusic(searchText) {
     statusMessage.textContent = "Loading music...";
@@ -61,8 +66,10 @@ async function searchMusic(searchText) {
     }
 }
 
+
+// FILTER SEARCH RESULTS
+
 function showSearchResults() {
-    musicResults.innerHTML = "";
 
     const selectedGenre = genreSelect.value;
 
@@ -75,14 +82,52 @@ function showSearchResults() {
     }
 
     if (filteredSongs.length === 0) {
-        statusMessage.textContent = "No songs found for this filter.";
+        musicResults.innerHTML = "";
+        statusMessage.textContent = "No songs found.";
+        return;
+    }
+
+    statusMessage.textContent = filteredSongs.length + " songs found.";
+
+    displaySongs(filteredSongs);
+}
+
+
+// FILTER SAVED SONGS
+
+function showSavedSongs() {
+
+    const selectedGenre = filterSelect.value;
+
+    let filteredSongs = savedSongs;
+
+    if (selectedGenre !== "all") {
+        filteredSongs = savedSongs.filter(function(song) {
+            return song.genre === selectedGenre;
+        });
+    }
+
+    if (filteredSongs.length === 0) {
+        musicResults.innerHTML = "";
+        statusMessage.textContent = "No saved songs found.";
         return;
     }
 
     statusMessage.textContent =
-        filteredSongs.length + " songs found.";
+        filteredSongs.length + " saved songs.";
 
-    filteredSongs.forEach(function(song) {
+    displaySongs(filteredSongs);
+}
+
+
+// DISPLAY SONGS ON WEBSITE
+
+function displaySongs(songs) {
+
+    musicResults.innerHTML = "";
+
+    songs.forEach(function(song) {
+
         const card = document.createElement("div");
         card.className = "music-card";
 
@@ -116,17 +161,23 @@ function showSearchResults() {
         card.appendChild(genre);
         card.appendChild(saveButton);
 
+        // PLAY MUSIC PREVIEW
+
         if (song.preview) {
+
             const previewButton = document.createElement("button");
             previewButton.textContent = "Play Preview";
             previewButton.style.marginTop = "8px";
 
             previewButton.addEventListener("click", function() {
+
                 const audio = new Audio(song.preview);
+
                 audio.play().catch(function() {
                     statusMessage.textContent =
                         "The preview could not be played.";
                 });
+
             });
 
             card.appendChild(previewButton);
@@ -136,7 +187,11 @@ function showSearchResults() {
     });
 }
 
+
+// SAVE SONG
+
 function saveSong(song) {
+
     const alreadySaved = savedSongs.some(function(savedSong) {
         return savedSong.id === song.id;
     });
@@ -149,60 +204,23 @@ function saveSong(song) {
     savedSongs.push(song);
 
     databaseMessage.textContent =
-        "Song added to the temporary collection. "
-        + "Database connection will be added next.";
+        "Song added to temporary collection.";
+
 }
 
-function showSavedSongs() {
-    musicResults.innerHTML = "";
 
-    if (savedSongs.length === 0) {
-        statusMessage.textContent = "Your collection is empty.";
-        return;
-    }
-
-    statusMessage.textContent =
-        savedSongs.length + " saved songs.";
-
-    const previousSongs = searchSongs;
-    searchSongs = savedSongs;
-
-    showSearchResults();
-
-    searchSongs = previousSongs;
-}
+// FILTER DROPDOWNS
 
 genreSelect.addEventListener("change", function() {
     showSearchResults();
 });
 
 filterSelect.addEventListener("change", function() {
-    const selectedGenre = filterSelect.value;
-
-    if (selectedGenre === "all") {
-        showSavedSongs();
-        return;
-    }
-
-    musicResults.innerHTML = "";
-
-    const filteredSongs = savedSongs.filter(function(song) {
-        return song.genre === selectedGenre;
-    });
-
-    if (filteredSongs.length === 0) {
-        statusMessage.textContent =
-            "No saved songs match this genre.";
-        return;
-    }
-
-    const previousSongs = searchSongs;
-    searchSongs = filteredSongs;
-
-    showSearchResults();
-
-    searchSongs = previousSongs;
+    showSavedSongs();
 });
+
+
+// NAVIGATION BUTTONS
 
 document.getElementById("showSavedButton")
     .addEventListener("click", function() {
