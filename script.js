@@ -231,3 +231,34 @@ document.getElementById("showSearchButton")
     .addEventListener("click", function() {
         showSearchResults();
     });
+
+// Push to GitHub
+function saveSongToDatabase(songData) {
+    // Specify the full path pointing to your LXI domain
+    const backendUrl = 'https://lxi.be';
+
+    fetch(backendUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: 'wolverine.vie@gmail.com',
+            title: songData.title,
+            artist: songData.artist,
+            album: songData.album || '',
+            preview_url: songData.previewUrl || ''
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Song saved successfully to your remote MariaDB database!');
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Network or Server Error:', error);
+    });
+}
