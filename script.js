@@ -235,7 +235,7 @@ document.getElementById("showSearchButton")
 // Push to GitHub
 function saveSongToDatabase(songData) {
     // Specify the full path pointing to your LXI domain
-    const backendUrl = 'https://lxi.be';
+    const backendUrl = 'https://samson-music-xplorer.lxi.be/save_song.php';
 
     fetch(backendUrl, {
         method: 'POST',
