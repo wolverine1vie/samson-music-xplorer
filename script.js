@@ -109,6 +109,8 @@ async function showSavedSongs() {
         }
 
         savedSongs = data.songs;
+        console.log("Songs received from database:", savedSongs); //Test
+        console.log("Number of saved songs:", savedSongs.length); //Test
 
     } catch (error) {
 
@@ -119,6 +121,7 @@ async function showSavedSongs() {
     }
 
     const selectedGenre = filterSelect.value;
+    console.log("Selected genre:", selectedGenre); //Test
 
     let filteredSongs = savedSongs;
 
