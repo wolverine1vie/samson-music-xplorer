@@ -95,7 +95,28 @@ function showSearchResults() {
 
 // FILTER SAVED SONGS
 
-function showSavedSongs() {
+async function showSavedSongs() {
+        try {
+
+        const response = await fetch(
+            "https://samson-music-xplorer.lxi.be/get_songs.php"
+        );
+
+        const data = await response.json();
+
+        if (data.status !== "success") {
+            throw new Error("Could not retrieve saved songs.");
+        }
+
+        savedSongs = data.songs;
+
+    } catch (error) {
+
+        statusMessage.textContent = "Could not load saved songs.";
+        console.error(error);
+        return;
+
+    }
 
     const selectedGenre = filterSelect.value;
 
