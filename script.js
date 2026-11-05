@@ -203,8 +203,9 @@ function saveSong(song) {
 
     savedSongs.push(song);
 
-    databaseMessage.textContent =
-        "Song added to temporary collection.";
+    databaseMessage.textContent = "Saving to database server...";
+    //database transfer function here 
+    saveSongToDatabase(song);
 
 }
 
@@ -247,7 +248,7 @@ function saveSongToDatabase(songData) {
             title: songData.title,
             artist: songData.artist,
             album: songData.album || '',
-            preview_url: songData.previewUrl || ''
+            preview_url: songData.preview || ''
         })
     })
     .then(response => response.json())
