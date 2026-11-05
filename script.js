@@ -244,10 +244,12 @@ function saveSongToDatabase(songData) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            email: 'wolverine.vie@gmail.com',
+            email: 'demo@example.com',
             title: songData.title,
             artist: songData.artist,
             album: songData.album || '',
+            genre: songData.genre,
+            artwork: songData.artwork,
             preview_url: songData.preview || ''
         })
     })
