@@ -89,7 +89,7 @@ function showSearchResults() {
 
     statusMessage.textContent = filteredSongs.length + " songs found.";
 
-    displaySongs(filteredSongs);
+    displaySongs(filteredSongs, true);
 }
 
 
@@ -141,13 +141,13 @@ async function showSavedSongs() {
     statusMessage.textContent =
         filteredSongs.length + " saved songs.";
 
-    displaySongs(filteredSongs);
+    displaySongs(filteredSongs, false);
 }
 
 
 // DISPLAY SONGS ON WEBSITE
 
-function displaySongs(songs) {
+function displaySongs(songs, showSaveButton) {
 
     musicResults.innerHTML = "";
 
@@ -172,19 +172,23 @@ function displaySongs(songs) {
         const genre = document.createElement("p");
         genre.textContent = song.genre;
 
-        const saveButton = document.createElement("button");
-        saveButton.textContent = "Save to My Collection";
+        if (showSaveButton) {
 
-        saveButton.addEventListener("click", function() {
-            saveSong(song);
-        });
+            const saveButton = document.createElement("button");
+            saveButton.textContent = "Save to My Collection";
+        
+            saveButton.addEventListener("click", function() {
+                saveSong(song);
+            });
+        
+            card.appendChild(saveButton);
+        }
 
         card.appendChild(image);
         card.appendChild(title);
         card.appendChild(artist);
         card.appendChild(album);
         card.appendChild(genre);
-        card.appendChild(saveButton);
 
         // PLAY MUSIC PREVIEW
 
