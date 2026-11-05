@@ -244,6 +244,7 @@ function saveSongToDatabase(songData) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            id: songData.id,
             email: 'demo@example.com',
             title: songData.title,
             artist: songData.artist,
