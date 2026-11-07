@@ -172,41 +172,36 @@ function displaySongs(songs, showSaveButton) {
         const genre = document.createElement("p");
         genre.textContent = song.genre;
 
-if (showSaveButton) {
+        // CREATE BUTTON
 
-    // SAVE BUTTON (Search Results)
+        let actionButton = document.createElement("button");
 
-    const saveButton = document.createElement("button");
-    saveButton.textContent = "Save to My Collection";
+        if (showSaveButton) {
 
-    saveButton.addEventListener("click", function() {
-        saveSong(song);
-    });
+            actionButton.textContent = "Save to My Collection";
 
-} else {
+            actionButton.addEventListener("click", function() {
+                saveSong(song);
+            });
 
-    // DELETE BUTTON (My Collection)
+        } else {
 
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Remove from Collection";
+            actionButton.textContent = "Remove from Collection";
 
-    deleteButton.addEventListener("click", function() {
-        deleteSong(song.db_id);
-    });
-    
-}
+            actionButton.addEventListener("click", function() {
+                deleteSong(song.db_id);
+            });
+
+        }
+
+        // ADD ELEMENTS TO CARD
 
         card.appendChild(image);
         card.appendChild(title);
         card.appendChild(artist);
         card.appendChild(album);
         card.appendChild(genre);
-        
-        if (showSaveButton) {
-            card.appendChild(saveButton);
-        } else {
-            card.appendChild(deleteButton);
-        }
+        card.appendChild(actionButton);
 
         // PLAY MUSIC PREVIEW
 
@@ -231,9 +226,9 @@ if (showSaveButton) {
         }
 
         musicResults.appendChild(card);
+
     });
 }
-
 
 // SAVE SONG
 
