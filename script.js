@@ -144,7 +144,6 @@ async function showSavedSongs() {
     displaySongs(filteredSongs, false);
 }
 
-
 // DISPLAY SONGS ON WEBSITE
 
 function displaySongs(songs, showSaveButton) {
@@ -172,7 +171,7 @@ function displaySongs(songs, showSaveButton) {
         const genre = document.createElement("p");
         genre.textContent = song.genre;
 
-        // CREATE BUTTON
+        // CREATE ACTION BUTTON
 
         let actionButton = document.createElement("button");
 
@@ -229,6 +228,7 @@ function displaySongs(songs, showSaveButton) {
 
     });
 }
+
 
 // SAVE SONG
 
