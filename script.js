@@ -234,19 +234,8 @@ function displaySongs(songs, showSaveButton) {
 
 function saveSong(song) {
 
-    const alreadySaved = savedSongs.some(function(savedSong) {
-        return savedSong.id === song.id;
-    });
-
-    if (alreadySaved) {
-        databaseMessage.textContent = "This song is already saved.";
-        return;
-    }
-
-    savedSongs.push(song);
-
     databaseMessage.textContent = "Saving to database server...";
-    //database transfer function here 
+
     saveSongToDatabase(song);
 
 }
