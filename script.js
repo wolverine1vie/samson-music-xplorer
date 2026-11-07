@@ -98,7 +98,8 @@ function showSearchResults() {
 // FILTER SAVED SONGS
 
 async function showSavedSongs() {
-
+    
+    backButton.hidden = false;
     statusMessage.textContent = "Loading saved songs...";
     
     try {
