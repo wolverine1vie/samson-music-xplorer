@@ -5,6 +5,7 @@ const filterSelect = document.getElementById("filterSelect");
 const musicResults = document.getElementById("musicResults");
 const statusMessage = document.getElementById("statusMessage");
 const databaseMessage = document.getElementById("databaseMessage");
+const backButton = document.getElementById("backButton");
 
 let searchSongs = [];
 let savedSongs = [];
