@@ -172,17 +172,32 @@ function displaySongs(songs, showSaveButton) {
         const genre = document.createElement("p");
         genre.textContent = song.genre;
 
-        if (showSaveButton) {
+if (showSaveButton) {
 
-            const saveButton = document.createElement("button");
-            saveButton.textContent = "Save to My Collection";
-        
-            saveButton.addEventListener("click", function() {
-                saveSong(song);
-            });
-        
-            card.appendChild(saveButton);
-        }
+    // SAVE BUTTON (Search Results)
+
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save to My Collection";
+
+    saveButton.addEventListener("click", function() {
+        saveSong(song);
+    });
+
+    card.appendChild(saveButton);
+
+} else {
+
+    // DELETE BUTTON (My Collection)
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Remove from Collection";
+
+    deleteButton.addEventListener("click", function() {
+        deleteSong(song.db_id);
+    });
+
+    card.appendChild(deleteButton);
+}
 
         card.appendChild(image);
         card.appendChild(title);
@@ -294,4 +309,48 @@ function saveSongToDatabase(songData) {
     .catch(error => {
         console.error('Network or Server Error:', error);
     });
+}
+// DELETE SONG FROM DATABASE
+
+async function deleteSong(songId) {
+
+    if (!confirm("Are you sure you want to remove this song?")) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "https://samson-music-xplorer.lxi.be/delete_song.php",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id: songId
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+
+            databaseMessage.textContent = data.message;
+
+            // Reload collection from database
+            showSavedSongs();
+
+        } else {
+
+            databaseMessage.textContent = data.message;
+        }
+
+    } catch (error) {
+
+        console.error("Delete error:", error);
+        databaseMessage.textContent = "Could not delete song.";
+
+    }
 }
