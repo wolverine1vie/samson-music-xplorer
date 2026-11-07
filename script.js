@@ -265,8 +265,9 @@ document.getElementById("showSearchButton")
     });
 
 // Push to GitHub
+
 function saveSongToDatabase(songData) {
-    // Specify the full path pointing to your LXI domain
+
     const backendUrl = 'https://samson-music-xplorer.lxi.be/save_song.php';
 
     fetch(backendUrl, {
@@ -282,21 +283,25 @@ function saveSongToDatabase(songData) {
             album: songData.album || '',
             genre: songData.genre,
             artwork: songData.artwork,
-            preview_url: songData.preview || ''
+            preview: songData.preview || ''
         })
     })
     .then(response => response.json())
     .then(data => {
+
+        databaseMessage.textContent = data.message;
+
         if (data.status === 'success') {
-            alert('Song saved successfully to your remote MariaDB database!');
-        } else {
-            alert('Error: ' + data.message);
+            showSavedSongs();
         }
+
     })
     .catch(error => {
         console.error('Network or Server Error:', error);
+        databaseMessage.textContent = 'Could not connect to the database.';
     });
 }
+
 // DELETE SONG FROM DATABASE
 
 async function deleteSong(songId) {
