@@ -254,6 +254,24 @@ filterSelect.addEventListener("change", function() {
     showSavedSongs();
 });
 
+backButton.addEventListener("click", function() {
+
+    musicResults.innerHTML = "";
+
+    statusMessage.textContent = "Search for an artist to get started.";
+
+    searchInput.value = "";
+    genreSelect.value = "all";
+    filterSelect.value = "all";
+
+    databaseMessage.textContent = "";
+
+    backButton.hidden = true;
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+});
+
 
 // NAVIGATION BUTTONS
 
