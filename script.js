@@ -183,8 +183,6 @@ if (showSaveButton) {
         saveSong(song);
     });
 
-    card.appendChild(saveButton);
-
 } else {
 
     // DELETE BUTTON (My Collection)
@@ -195,8 +193,7 @@ if (showSaveButton) {
     deleteButton.addEventListener("click", function() {
         deleteSong(song.db_id);
     });
-
-    card.appendChild(deleteButton);
+    
 }
 
         card.appendChild(image);
@@ -204,6 +201,12 @@ if (showSaveButton) {
         card.appendChild(artist);
         card.appendChild(album);
         card.appendChild(genre);
+        
+        if (showSaveButton) {
+            card.appendChild(saveButton);
+        } else {
+            card.appendChild(deleteButton);
+        }
 
         // PLAY MUSIC PREVIEW
 
