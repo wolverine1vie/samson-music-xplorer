@@ -71,7 +71,7 @@ async function searchMusic(searchText) {
 // FILTER SEARCH RESULTS
 
 function showSearchResults() {
-
+    backButton.hidden = false;
     const selectedGenre = genreSelect.value;
 
     let filteredSongs = searchSongs;
@@ -84,7 +84,6 @@ function showSearchResults() {
 
     if (filteredSongs.length === 0) {
         musicResults.innerHTML = "";
-        backButton.hidden = false;
         statusMessage.textContent = "No songs found.";
         return;
     }
