@@ -6,6 +6,7 @@ const musicResults = document.getElementById("musicResults");
 const statusMessage = document.getElementById("statusMessage");
 const databaseMessage = document.getElementById("databaseMessage");
 const backButton = document.getElementById("backButton");
+console.log("Back button:", backButton);
 
 let searchSongs = [];
 let savedSongs = [];
